@@ -102,6 +102,39 @@ public class LinkedList {
         }
     }
 
+    public Node get(int index){
+        if(index < 0 || index > length){
+            return null;
+        }
+        Node temp = head;
+        int i = 0;
+        while(temp != null){
+            if(i == index){
+                return temp;
+            }
+            temp = temp.getNext();
+            i++;
+        }
+        return null;
+    }
+
+    public boolean set(int index, int value){
+        if(index < 0 || index >= length){
+            return false;
+        }
+        int i = 0;
+        Node temp = head;
+        while(temp != null){
+            if(i == index){
+                temp.setValue(value);
+                return true;
+            }
+            temp = temp.getNext();
+            i++;
+        }
+        return false;
+    }
+
     public void printInfo(){
         Node temp = this.head;
         while(temp != null){

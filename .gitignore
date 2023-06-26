@@ -1,5 +1,6 @@
 # Specific project untrace files
 out/
+.idea/
 Trial.java
 
 # Compiled class file

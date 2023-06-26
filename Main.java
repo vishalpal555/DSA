@@ -15,6 +15,7 @@ public class Main {
                             case "4": removeLast();
                             case "5": prepend(sc.nextInt());
                             case "6": removeFirst();
+                            case "7": get(int index);
                         """
         );
         System.out.print("Enter an option: ");
@@ -43,6 +44,9 @@ public class Main {
                     System.out.println("Removed " +list.removeFirst());
                     list.printAll();
                     break;
+                case "7":
+                    System.out.println("Enter the index: ");
+                    System.out.println(list.get(sc.nextInt()));
                 default:
                     System.out.println("None selected");
                     break;
