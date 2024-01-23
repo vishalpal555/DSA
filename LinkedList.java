@@ -1,4 +1,11 @@
 public class LinkedList {
+    class Node {
+        int value;
+        Node next;
+        public Node(int value) {
+            this.value = value;
+        }
+    }
     private Node head;
     private Node tail;
     private int length;
@@ -26,20 +33,19 @@ public class LinkedList {
         Node newNode = new Node(value);
         if(this.length == 0){
             this.head = newNode;
-            this.tail = newNode;
         }
         else if(this.length > 0){
-            this.tail.setNext(newNode);
-            this.tail = newNode;
+            this.tail.next = newNode;
         }
+        this.tail = newNode;
         this.length++;
     }
 
     public void printAll(){
         Node temp = this.head;
         while(temp != null){
-            System.out.println(temp.getValue());
-            temp = temp.getNext();
+            System.out.println(temp.value);
+            temp = temp.next;
         }
     }
 
@@ -57,13 +63,13 @@ public class LinkedList {
         else{
             Node pre = head;
             Node temp = head;
-            while(temp.getNext() != null){
+            while(temp.next != null){
                 pre = temp;
-                temp = temp.getNext();
+                temp = temp.next;
             }
             this.length--;
             this.tail = pre;
-            this.tail.setNext(null);
+            this.tail.next = null;
             return temp;
         }
     }
@@ -75,7 +81,7 @@ public class LinkedList {
             this.tail = newNode;
         }
         else{
-            newNode.setNext(head);
+            newNode.next = head;
             head = newNode;
         }
         this.length++;
@@ -89,14 +95,14 @@ public class LinkedList {
             Node temp = this.head;
             this.head = null;
             this.tail = null;
-            temp.setNext(null);
+            temp.next = null;
             this.length -- ;
             return temp;
         }
         else{
             Node temp = head;
-            head = head.getNext();
-            temp.setNext(null);
+            head = head.next;
+            temp.next = null;
             this.length--;
             return temp;
         }
@@ -112,7 +118,7 @@ public class LinkedList {
             if(i == index){
                 return temp;
             }
-            temp = temp.getNext();
+            temp = temp.next;
             i++;
         }
         return null;
@@ -126,10 +132,10 @@ public class LinkedList {
         Node temp = head;
         while(temp != null){
             if(i == index){
-                temp.setValue(value);
+                temp.value = value;
                 return true;
             }
-            temp = temp.getNext();
+            temp = temp.next;
             i++;
         }
         return false;
@@ -151,8 +157,8 @@ public class LinkedList {
         else{
             Node newNode = new Node(value);
             Node prevNode = this.get(index-1);
-            newNode.setNext(prevNode.getNext());
-            prevNode.setNext(newNode);
+            newNode.next = prevNode.next;
+            prevNode.next = newNode;
             flag = true;
         }
         this.length++;
@@ -172,19 +178,34 @@ public class LinkedList {
         }
         else{
             Node prevNode = this.get(index-1);
-            temp = prevNode.getNext();
-            prevNode.setNext(temp.getNext());
+            temp = prevNode.next;
+            prevNode.next = temp.next;
         }
-        temp.setNext(null);
+        temp.next = null;
         this.length--;
         return temp;
+    }
+
+    public void reverse(){
+        Node temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+
+        Node after = null;
+        Node prev = null;
+        for(int i = 0; i < this.length; i++){
+            after = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = after;
+        }
     }
 
     public void printInfo(){
         Node temp = this.head;
         while(temp != null){
-            System.out.println("This address : " +temp +" | Value : " +temp.getValue() +" | Next Address : " +temp.getNext());
-            temp = temp.getNext();
+            System.out.println("This address : " +temp +" | Value : " +temp.value +" | Next Address : " +temp.next);
+            temp = temp.next;
         }
     }
 }
